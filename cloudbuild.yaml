@@ -1,0 +1,23 @@
+steps:
+  # Build da imagem
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/oda-siconfi', '.']
+
+  # Push para o registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/oda-siconfi']
+
+  # Deploy do Job no Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'jobs'
+      - 'deploy'
+      - 'oda-siconfi-finbra'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/oda-siconfi'
+      - '--region'
+      - 'southamerica-east1'
+      - '--set-env-vars'
+      - 'BUCKET_NOME=dados_alagoinhas_bronze,ROOT_PATH=financas,MUNICIPIO_IBGE=2900702,ANO_INICIO=2015,ANO_FIM=2027'
