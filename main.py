@@ -11,7 +11,7 @@ BUCKET_NOME = os.getenv("BUCKET_NOME", "dados_alagoinhas_bronze")
 ROOT_PATH = os.getenv("ROOT_PATH", "financas")
 MUNICIPIO_IBGE = os.getenv("MUNICIPIO_IBGE", "2900702")
 ANO_INICIO = int(os.getenv("ANO_INICIO", "2015"))
-ANO_FIM = int(os.getenv("ANO_FIM", "2023"))
+ANO_FIM = int(os.getenv("ANO_FIM", "2026"))
 
 API_URL = "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/dca"
 
